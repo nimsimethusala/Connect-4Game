@@ -35,6 +35,14 @@ public class Winner {
         return col2;
     }
 
+    public int getRow2() {
+        return raw2;
+    }
+
+    public int getRow1() {
+        return raw1;
+    }
+
     @Override
     public String toString() {
         return "Winner{" +
@@ -44,13 +52,5 @@ public class Winner {
                 ", col2=" + col2 +
                 ", raw2=" + raw2 +
                 '}';
-    }
-
-    public int getRow2() {
-        return raw2;
-    }
-
-    public int getRow1() {
-        return raw1;
     }
 }
