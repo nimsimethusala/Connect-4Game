@@ -3,15 +3,12 @@ package lk.ijse.dep.service;
 import lk.ijse.dep.controller.BoardController;
 
 public class BoardImpl implements Board {
-    public Piece[][] pieces = new Piece[Board.NUM_OF_ROWS][Board.NUM_OF_COLS];
+    private Piece[][] pieces;
     private BoardUI boardUI;
 
     public BoardImpl(BoardUI boardUI) {
         this.boardUI = boardUI;
-    }
-
-    public BoardImpl(BoardController boardController){
-        this.boardUI = boardController;
+         pieces = new Piece[Board.NUM_OF_ROWS][Board.NUM_OF_COLS];
         for (int i = 0; i < pieces.length; i++){
             for (int j = 0; j < pieces[i].length; j++){
                 pieces[i][j] = Piece.EMPTY;
@@ -36,7 +33,30 @@ public class BoardImpl implements Board {
 
     @Override
     public Winner findWinner() {
-        return null;
+        for (int i = 0; i < pieces.length; i++){
+            for (int j = 0; j < pieces[i].length - 3; j++){
+                if (pieces[i][j].equals(Piece.EMPTY)
+                    && pieces[i][j].equals(Piece.GREEN)
+                    && pieces[i][j+1].equals(Piece.GREEN)
+                    && pieces[i][j+2].equals(Piece.GREEN)
+                    && pieces[i][j+3].equals(Piece.GREEN)){
+                    return new Winner(pieces[i][j],i,j,i,j+1);
+                }
+            }
+        }
+
+        for (int i = 0; i < pieces.length; i++){
+            for (int j = 0; j < pieces[i].length - 3; j++){
+                if (pieces[i][j].equals(Piece.EMPTY)
+                    && pieces[i][j].equals(Piece.BLUE)
+                    && pieces[i+1][j].equals(Piece.BLUE)
+                    && pieces[i+2][j].equals(Piece.BLUE)
+                    && pieces[i+3][j].equals(Piece.BLUE)){
+                    return new Winner(pieces[i][j],i,j,i,j+1);
+                }
+            }
+        }
+        return new Winner(Piece.EMPTY);
     }
 
     @Override
@@ -61,7 +81,7 @@ public class BoardImpl implements Board {
 
     @Override
     public void updateMove(int col, Piece move) {
-
+        pieces[col][findNextAvailableSpot(col)] = move;
     }
 
     @Override

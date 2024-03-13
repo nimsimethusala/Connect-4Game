@@ -1,4 +1,4 @@
-package lk.ijse.dep.util;
+package lk.ijse.dep;
 
 public class Launcher {
 

@@ -1,4 +1,4 @@
-package lk.ijse.dep.service;
+package lk.ijse.dep.util;
 
 import javafx.scene.control.Alert;
 

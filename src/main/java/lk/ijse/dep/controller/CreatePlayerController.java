@@ -10,7 +10,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.CubicCurve;
 import javafx.stage.Stage;
-import lk.ijse.dep.service.DEPAlert;
+import lk.ijse.dep.util.DEPAlert;
 
 import java.io.IOException;
 
