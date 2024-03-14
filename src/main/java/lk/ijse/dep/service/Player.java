@@ -2,7 +2,7 @@ package lk.ijse.dep.service;
 
 public abstract class Player {
 
-    private final Board board;
+    protected Board board;
 
     public Player(Board board) {
         this.board = board;

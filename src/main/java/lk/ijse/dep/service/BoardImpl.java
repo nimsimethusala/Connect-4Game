@@ -3,28 +3,28 @@ package lk.ijse.dep.service;
 import lk.ijse.dep.controller.BoardController;
 
 public class BoardImpl implements Board {
-    private Piece[][] pieces;
-    private BoardUI boardUI;
+    private final Piece[][] pieces = new Piece[Board.NUM_OF_COLS][Board.NUM_OF_ROWS];;
+    private final BoardUI boardUI;
 
     public BoardImpl(BoardUI boardUI) {
-        this.boardUI = boardUI;
-         pieces = new Piece[Board.NUM_OF_ROWS][Board.NUM_OF_COLS];
+
         for (int i = 0; i < pieces.length; i++){
             for (int j = 0; j < pieces[i].length; j++){
                 pieces[i][j] = Piece.EMPTY;
             }
         }
+        this.boardUI = boardUI;
     }
 
     @Override
     public BoardUI getBoardUI() {
-        return boardUI;
+        return this.boardUI;
     }
 
     @Override
     public int findNextAvailableSpot(int col) {
-        for (int i = 0; i < NUM_OF_ROWS; i++){
-            if (this.pieces[col][i].equals(Piece.EMPTY)){
+        for (int i = 0; i <pieces[col].length; i++) {
+            if (pieces[col][i] == Piece.EMPTY) {
                 return i;
             }
         }
@@ -36,7 +36,6 @@ public class BoardImpl implements Board {
         for (int i = 0; i < pieces.length; i++){
             for (int j = 0; j < pieces[i].length - 3; j++){
                 if (pieces[i][j].equals(Piece.EMPTY)
-                    && pieces[i][j].equals(Piece.GREEN)
                     && pieces[i][j+1].equals(Piece.GREEN)
                     && pieces[i][j+2].equals(Piece.GREEN)
                     && pieces[i][j+3].equals(Piece.GREEN)){
@@ -45,10 +44,9 @@ public class BoardImpl implements Board {
             }
         }
 
-        for (int i = 0; i < pieces.length; i++){
-            for (int j = 0; j < pieces[i].length - 3; j++){
+        for (int i = 0; i < pieces.length - 3; i++){
+            for (int j = 0; j < pieces[i].length; j++){
                 if (pieces[i][j].equals(Piece.EMPTY)
-                    && pieces[i][j].equals(Piece.BLUE)
                     && pieces[i+1][j].equals(Piece.BLUE)
                     && pieces[i+2][j].equals(Piece.BLUE)
                     && pieces[i+3][j].equals(Piece.BLUE)){
@@ -61,7 +59,7 @@ public class BoardImpl implements Board {
 
     @Override
     public boolean isLegalMove(int col) {
-        if (findNextAvailableSpot(col) == -1){
+        if (this.findNextAvailableSpot(col) != -1){
             return true;
         }
         return false;
@@ -81,7 +79,7 @@ public class BoardImpl implements Board {
 
     @Override
     public void updateMove(int col, Piece move) {
-        pieces[col][findNextAvailableSpot(col)] = move;
+        this.pieces[col][findNextAvailableSpot(col)] = move;
     }
 
     @Override
