@@ -3,7 +3,7 @@ package lk.ijse.dep.service;
 import lk.ijse.dep.controller.BoardController;
 
 public class BoardImpl implements Board {
-    private final Piece[][] pieces = new Piece[Board.NUM_OF_COLS][Board.NUM_OF_ROWS];;
+    private final Piece[][] pieces = new Piece[NUM_OF_COLS][NUM_OF_ROWS];;
     private final BoardUI boardUI;
 
     public BoardImpl(BoardUI boardUI) {
@@ -33,24 +33,23 @@ public class BoardImpl implements Board {
 
     @Override
     public Winner findWinner() {
-        for (int i = 0; i < pieces.length; i++){
-            for (int j = 0; j < pieces[i].length - 3; j++){
-                if (pieces[i][j].equals(Piece.EMPTY)
-                    && pieces[i][j+1].equals(Piece.GREEN)
-                    && pieces[i][j+2].equals(Piece.GREEN)
-                    && pieces[i][j+3].equals(Piece.GREEN)){
-                    return new Winner(pieces[i][j],i,j,i,j+1);
-                }
-            }
-        }
-
-        for (int i = 0; i < pieces.length - 3; i++){
-            for (int j = 0; j < pieces[i].length; j++){
-                if (pieces[i][j].equals(Piece.EMPTY)
-                    && pieces[i+1][j].equals(Piece.BLUE)
-                    && pieces[i+2][j].equals(Piece.BLUE)
-                    && pieces[i+3][j].equals(Piece.BLUE)){
-                    return new Winner(pieces[i][j],i,j,i,j+1);
+        for (int i = 0; i < pieces.length; i++) {
+            for (int j = 0; j < pieces[i].length; j++) {
+                if (pieces[i][j] != Piece.EMPTY) {
+                    // Horizontal check
+                    if (j <= pieces[i].length - 4
+                        && pieces[i][j] == pieces[i][j+1]
+                        && pieces[i][j] == pieces[i][j+2]
+                        && pieces[i][j] == pieces[i][j+3]) {
+                        return new Winner(pieces[i][j], i, j, i, j+3);
+                    }
+                    // Vertical check
+                    if (i <= pieces.length - 4
+                        && pieces[i][j] == pieces[i+1][j]
+                        && pieces[i][j] == pieces[i+2][j]
+                        && pieces[i][j] == pieces[i+3][j]) {
+                        return new Winner(pieces[i][j], i, j, i+3, j);
+                    }
                 }
             }
         }
