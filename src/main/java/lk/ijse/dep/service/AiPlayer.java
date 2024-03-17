@@ -1,5 +1,4 @@
 package lk.ijse.dep.service;
-
 import java.util.ArrayList;
 
 public class AiPlayer extends Player{
@@ -26,8 +25,10 @@ public class AiPlayer extends Player{
             }
             else col = bestMoveToDefend;
         }
+
         board.updateMove(col, Piece.GREEN);
         board.getBoardUI().update(col, false);
+
         Winner winner = board.findWinner();
         if (winner.getWinningPiece() != Piece.EMPTY) {
             board.getBoardUI().notifyWinner(winner);
