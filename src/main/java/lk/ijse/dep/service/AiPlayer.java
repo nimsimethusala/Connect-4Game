@@ -12,8 +12,6 @@ public class AiPlayer extends Player {
         int x = colChosser();
         if (x== -1){
             do {
-                //  Random rand = new Random();
-                //  col = rand.nextInt(6);
                 int range = 6;
                 col = (int)(Math.random()*range);
 
