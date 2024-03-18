@@ -85,9 +85,4 @@ public class BoardImpl implements Board {
     public void updateMove(int col, int row, Piece move) {
         this.pieces[col][row] = move;
     }
-
-    @Override
-    public Piece[][] getPiece() {
-        return pieces;
-    }
 }
