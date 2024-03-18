@@ -18,5 +18,4 @@ public interface Board {
 
     public void updateMove(int col, int row, Piece move);
 
-    Piece[][] getPiece();
 }
